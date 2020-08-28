@@ -16,7 +16,7 @@ CORS(app)
 !! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 '''
-db_drop_and_create_all()
+#db_drop_and_create_all()
 
 ## ROUTES
 '''
@@ -118,12 +118,11 @@ def update_drink(jwt, id):
     drink = Drink.query.filter(Drink.id == id).one_or_none()
     if drink is None:
         abort(404)
-    if req_title != '':
+    if req_title:
         drink.title = req_title
 
-    if len(req_recipe) != 0:
+    if req_recipe:
         drink.recipe = json.dumps(req_recipe)
-
 
     try:
         drink.update()
